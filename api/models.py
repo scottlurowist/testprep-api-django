@@ -45,6 +45,18 @@ class Category(models.Model):
         }
 
 
+class Question(models.Model):
+    """ Defines the model for a testprep Question. A test has one or more
+        questions, and questions may have two or more choices.
+    """
+
+    question_text = models.CharField(max_length = 100)
+    question_type = models.CharField(max_length = 10)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    test = models.ForeignKey('Test', on_delete = models.CASCADE, related_name='questions')
+
+
 # Create your models here.
 class Test(models.Model):
     """ Defines the model for a testprep Test. Many tests may be grouped

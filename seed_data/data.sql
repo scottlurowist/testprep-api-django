@@ -50,8 +50,8 @@ BEGIN
     INSERT INTO
         api_test (name, description, is_published, created_at, updated_at)
     VALUES
-    ('Russian Grammar 1', 'Basic Russian Grammar', true, current_timestamp,
-      current_timestamp)
+        ('Russian Grammar 1', 'Basic Russian Grammar', false, current_timestamp,
+         current_timestamp)
     RETURNING id INTO russian_grammar_test_id;  
      
 
@@ -61,6 +61,13 @@ BEGIN
     VALUES
          (russian_grammar_test_id, grammar_cat_id),
          (russian_grammar_test_id, russian_language_cat_id);
+
+    -- Insert a few questions.
+    INSERT INTO
+         api_question(question_text, question_type, created_at, updated_at, test_id)
+    VALUES
+         ('What is the accusative case?', 'selectBest', current_timestamp, current_timestamp, russian_grammar_test_id),
+         ('What is the dative case?', 'selectBest', current_timestamp, current_timestamp, russian_grammar_test_id);         
 
 
 END $$;

@@ -99,7 +99,7 @@ class TestSerializer(serializers.ModelSerializer):
         except DatabaseError as generic_db_error:
             raise serializers.ValidationError(f'{generic_db_error}')
         else:
-            return validated_data
+            return new_test
 
 
 class CategorySerializer(serializers.ModelSerializer):
